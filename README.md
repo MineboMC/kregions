@@ -1,0 +1,1 @@
+A fork of the private kRegions plugin, this is improved, smoother, and just in general better. Mostly just by using our new library instead of relying on Nougat.

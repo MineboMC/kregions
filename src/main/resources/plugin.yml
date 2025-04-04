@@ -1,0 +1,6 @@
+name: kRegions
+main: net.minebo.kregions.KRegions
+author: ForestBukkit
+description: "WorldGuard = bad, kRegions = good"
+version: 1.0-DEV
+api-version: 1.18
