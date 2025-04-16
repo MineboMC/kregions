@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 public class NoBuild extends Flag {
     public NoBuild() {
-        super("NoMobs");
+        super("NoBuild");
     }
 
     @EventHandler
