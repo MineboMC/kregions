@@ -3,6 +3,7 @@ package net.minebo.kregions.flag;
 import net.minebo.kregions.manager.RegionManager;
 import net.minebo.kregions.model.Flag;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -25,7 +26,7 @@ public class NoBuild extends Flag {
 
     @EventHandler
     public void onPlayerPlace(BlockPlaceEvent event) {
-        if(RegionManager.getRegionByLocation(event.getBlock().getLocation()) != null) {
+        if (RegionManager.getRegionByLocation(event.getBlock().getLocation()) != null) {
             if (RegionManager.getRegionByLocation(event.getBlock().getLocation()).containsFlag(this)) {
                 if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
                     event.setCancelled(true);
@@ -33,4 +34,5 @@ public class NoBuild extends Flag {
             }
         }
     }
+
 }

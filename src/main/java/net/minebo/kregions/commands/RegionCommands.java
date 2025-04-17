@@ -89,14 +89,14 @@ public class RegionCommands extends BaseCommand {
     @CommandPermission("basic.admin")
     @Syntax("<name> <flag>")
     @CommandCompletion("@regions @flags")
-    public void onRegionFlagAddCommand(final Player sender, String name, final String flag) {
+    public void onRegionFlagAddCommand(final Player sender, String name, String flag) {
 
         if(RegionManager.getRegionByName(name) == null) {
             sender.sendMessage(ChatColor.RED + "That region doesn't exist!");
             return;
         }
 
-        if(RegionManager.getRegionByName(name).getFlags().contains(FlagManager.getFlagByName(flag))) {
+        if(RegionManager.getRegionByName(name).containsFlag(FlagManager.getFlagByName(flag))) {
             sender.sendMessage(ChatColor.RED + "That region already has that flag.");
             return;
         }
@@ -110,14 +110,14 @@ public class RegionCommands extends BaseCommand {
     @CommandPermission("basic.admin")
     @Syntax("<name> <flag>")
     @CommandCompletion("@regions @flags")
-    public void onRegionFlagRemoveCommand(final Player sender, String name, final String flag) {
+    public void onRegionFlagRemoveCommand(final Player sender, String name, String flag) {
 
         if(RegionManager.getRegionByName(name) == null) {
             sender.sendMessage(ChatColor.RED + "That region doesn't exist!");
             return;
         }
 
-        if(!RegionManager.getRegionByName(name).getFlags().contains(FlagManager.getFlagByName(flag))) {
+        if(!RegionManager.getRegionByName(name).containsFlag(FlagManager.getFlagByName(flag))) {
             sender.sendMessage(ChatColor.RED + "That region doesn't have that flag.");
             return;
         }
