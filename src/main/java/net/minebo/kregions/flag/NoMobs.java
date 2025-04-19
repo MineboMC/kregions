@@ -25,8 +25,10 @@ public class NoMobs extends Flag {
 
                 // MCRaidz Logic
                 if(event.getEntityType() == EntityType.CHICKEN) {
-                    if(event.getEntity().getCustomName().contains("Logger")) {
-                        return;
+                    if(event.getEntity().getCustomName() != null) {
+                        if (event.getEntity().getCustomName().contains("Logger")) {
+                            return;
+                        }
                     }
                 }
 
