@@ -5,6 +5,7 @@ import net.minebo.kregions.model.Flag;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.persistence.PersistentDataType;
@@ -19,10 +20,9 @@ public class NoMobs extends Flag {
     public EntityType[] allowedEntities = {EntityType.ENDER_PEARL, EntityType.SPLASH_POTION, EntityType.DROPPED_ITEM, EntityType.EXPERIENCE_ORB, EntityType.THROWN_EXP_BOTTLE};
 
     @EventHandler
-    public void onMobSpawn(EntitySpawnEvent event) {
+    public void onMobSpawn(CreatureSpawnEvent event) {
         if(RegionManager.getRegionByLocation(event.getLocation()) != null) {
             if (RegionManager.getRegionByLocation(event.getLocation()).containsFlag(this)) {
-
                 // MCRaidz Logic
                 if(event.getEntityType() == EntityType.CHICKEN) {
                     if(event.getEntity().getCustomName() != null) {
