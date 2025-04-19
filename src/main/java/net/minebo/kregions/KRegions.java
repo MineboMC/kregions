@@ -1,5 +1,6 @@
 package net.minebo.kregions;
 
+import net.minebo.cobalt.gson.Gson;
 import net.minebo.kregions.commands.RegionCommands;
 import net.minebo.kregions.completion.FlagCompletionHandler;
 import net.minebo.kregions.completion.RegionCompletionHandler;
@@ -25,6 +26,7 @@ public final class KRegions extends JavaPlugin
         ACFCommandController.registerCompletion("regions", new RegionCompletionHandler());
 
         ACFCommandController.registerCommand(new RegionCommands());
+        Gson.init();
 
         FlagManager.init();
         RegionManager.init();
