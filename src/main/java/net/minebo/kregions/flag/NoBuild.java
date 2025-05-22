@@ -17,7 +17,7 @@ public class NoBuild extends Flag {
     public void onBlockBreak(BlockBreakEvent event) {
         if(RegionManager.getRegionByLocation(event.getBlock().getLocation()) != null) {
             if (RegionManager.getRegionByLocation(event.getBlock().getLocation()).containsFlag(this)) {
-                if (event.getPlayer().getGameMode() != GameMode.CREATIVE && (!event.getPlayer().isOp() || event.getPlayer().hasMetadata("modmode"))) {
+                if ((event.getPlayer().getGameMode() != GameMode.CREATIVE && !event.getPlayer().isOp()) || event.getPlayer().hasMetadata("modmode")) {
                     event.setCancelled(true);
                 }
             }
@@ -28,7 +28,7 @@ public class NoBuild extends Flag {
     public void onPlayerPlace(BlockPlaceEvent event) {
         if (RegionManager.getRegionByLocation(event.getBlock().getLocation()) != null) {
             if (RegionManager.getRegionByLocation(event.getBlock().getLocation()).containsFlag(this)) {
-                if (event.getPlayer().getGameMode() != GameMode.CREATIVE &&  (!event.getPlayer().isOp() || event.getPlayer().hasMetadata("modmode"))) {
+                if ((event.getPlayer().getGameMode() != GameMode.CREATIVE && !event.getPlayer().isOp()) || event.getPlayer().hasMetadata("modmode")) {
                     event.setCancelled(true);
                 }
             }
