@@ -25,7 +25,7 @@ public final class KRegions extends JavaPlugin
         ACFCommandController.registerCompletion("flags", new FlagCompletionHandler());
         ACFCommandController.registerCompletion("regions", new RegionCompletionHandler());
 
-        ACFCommandController.registerCommand(new RegionCommands());
+        ACFCommandController.registerAll(this);
         Gson.init();
 
         FlagManager.init();

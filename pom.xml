@@ -81,7 +81,7 @@
             <groupId>net.minebo</groupId>
             <artifactId>cobalt</artifactId>
             <version>1.0-DEV</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
