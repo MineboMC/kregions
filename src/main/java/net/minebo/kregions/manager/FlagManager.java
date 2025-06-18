@@ -1,6 +1,7 @@
 package net.minebo.kregions.manager;
 
 import net.minebo.kregions.flag.NoBuild;
+import net.minebo.kregions.flag.NoDamage;
 import net.minebo.kregions.flag.NoMobs;
 import net.minebo.kregions.flag.SafeZone;
 import net.minebo.kregions.model.Flag;
@@ -16,6 +17,7 @@ public class FlagManager {
         new SafeZone();
         new NoMobs();
         new NoBuild();
+        new NoDamage();
     }
 
     public static Flag getFlagByName(String name) {
