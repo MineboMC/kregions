@@ -22,8 +22,10 @@ public class NoDamage extends Flag {
         Player player = (Player) event.getEntity();
 
         // Check if the flag applies in this region
-        if (RegionManager.getRegionByLocation(player.getLocation()).containsFlag(this)) {
-            event.setCancelled(true); // Cancel incoming damage
+        if(RegionManager.getRegionByLocation(player.getLocation()) != null) {
+            if (RegionManager.getRegionByLocation(player.getLocation()).containsFlag(this)) {
+                event.setCancelled(true); // Cancel incoming damage
+            }
         }
     }
 
@@ -35,8 +37,10 @@ public class NoDamage extends Flag {
         Player damager = (Player) event.getDamager();
 
         // Check if the flag applies where the attacker is
-        if (RegionManager.getRegionByLocation(damager.getLocation()).containsFlag(this) || RegionManager.getRegionByLocation(event.getEntity().getLocation()).containsFlag(this)) {
-            event.setCancelled(true); // Cancel outgoing damage
+        if(RegionManager.getRegionByLocation(damager.getLocation()) != null) {
+            if (RegionManager.getRegionByLocation(damager.getLocation()).containsFlag(this) || RegionManager.getRegionByLocation(event.getEntity().getLocation()).containsFlag(this)) {
+                event.setCancelled(true); // Cancel outgoing damage
+            }
         }
     }
 
