@@ -96,6 +96,11 @@ public class RegionCommands extends BaseCommand {
             return;
         }
 
+        if(RegionManager.getRegionByName(name) == null) {
+            sender.sendMessage(ChatColor.RED + "That flag doesn't exist!");
+            return;
+        }
+
         if(RegionManager.getRegionByName(name).containsFlag(FlagManager.getFlagByName(flag))) {
             sender.sendMessage(ChatColor.RED + "That region already has that flag.");
             return;
