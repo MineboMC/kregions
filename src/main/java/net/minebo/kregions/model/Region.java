@@ -225,6 +225,15 @@ public class Region implements Iterable<Coordinate> {
                 this.name + ":" + this.world;
     }
 
+    public List<Coordinate> getBorderCoordinates() {
+        List<Coordinate> borderCoords = new ArrayList<>();
+        Iterator<Coordinate> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            borderCoords.add(iterator.next());
+        }
+        return borderCoords;
+    }
+
     @Override
     public Iterator<Coordinate> iterator() {
         return new BorderIterator(this.x1, this.z1, this.x2, this.z2);
