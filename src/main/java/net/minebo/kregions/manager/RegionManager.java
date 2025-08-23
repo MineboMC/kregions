@@ -6,6 +6,7 @@ import com.mongodb.BasicDBObject;
 import lombok.Getter;
 import net.minebo.cobalt.gson.Gson;
 import net.minebo.kregions.KRegions;
+import net.minebo.kregions.model.Flag;
 import net.minebo.kregions.model.Region;
 import org.bukkit.Location;
 
@@ -26,6 +27,7 @@ public class RegionManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         loadRegions();
     }
 
@@ -35,6 +37,7 @@ public class RegionManager {
                 return c;
             }
         }
+
         return null;
     }
 
@@ -44,7 +47,18 @@ public class RegionManager {
                 return c;
             }
         }
+
         return null;
+    }
+
+    public static List<Region> getRegionsByFlag(Flag flag) {
+        List<Region> regions = new ArrayList<>();
+
+        for (Region c : getRegions()) {
+            if(c.containsFlag(flag)) regions.add(c);
+        }
+
+        return regions;
     }
 
     public static void loadRegions() {
