@@ -193,6 +193,19 @@ public class Region implements Iterable<Coordinate> {
         this.z2 = Math.max(loc1.getBlockZ(), loc2.getBlockZ());
     }
 
+    public Location getCenter() {
+        World worldObj = KRegions.getInstance().getServer().getWorld(this.world);
+        int minX = Math.min(x1, x2), maxX = Math.max(x1, x2);
+        int minY = Math.min(y1, y2), maxY = Math.max(y1, y2);
+        int minZ = Math.min(z1, z2), maxZ = Math.max(z1, z2);
+
+        double centerX = (minX + maxX) / 2.0;
+        double centerY = (minY + maxY) / 2.0;
+        double centerZ = (minZ + maxZ) / 2.0;
+
+        return new Location(worldObj, centerX, centerY, centerZ);
+    }
+
     public Location[] getCornerLocations() {
         final World world = KRegions.getInstance().getServer().getWorld(this.world);
         return new Location[] {
