@@ -52,8 +52,44 @@ public class RegionCommands extends BaseCommand {
     @Subcommand("pos1")
     @CommandPermission("basic.admin")
     @Syntax("<name>")
-    @CommandCompletion("@regions @flags")
+    @CommandCompletion("@regions")
     public void onRegionSetPos1Command(final Player sender, String name) {
+
+        if(RegionManager.getRegionByName(name) == null) {
+            sender.sendMessage(ChatColor.RED + "That region doesn't exist!");
+            return;
+        }
+
+        sender.sendMessage(ChatColor.YELLOW + "Set " + ChatColor.WHITE + name + ChatColor.YELLOW + "'s 1st position.");
+        RegionManager.getRegionByName(name).setX1(sender.getLocation().getBlockX());
+        RegionManager.getRegionByName(name).setY1(sender.getLocation().getBlockY());
+        RegionManager.getRegionByName(name).setZ1(sender.getLocation().getBlockZ());
+        RegionManager.saveRegions();
+    }
+
+    @Subcommand("pos2")
+    @CommandPermission("basic.admin")
+    @Syntax("<name>")
+    @CommandCompletion("@regions")
+    public void onRegionSetPos2Command(final Player sender, String name) {
+
+        if(RegionManager.getRegionByName(name) == null) {
+            sender.sendMessage(ChatColor.RED + "That region doesn't exist!");
+            return;
+        }
+
+        sender.sendMessage(ChatColor.YELLOW + "Set " + ChatColor.WHITE + name + ChatColor.YELLOW + "'s 2nd position.");
+        RegionManager.getRegionByName(name).setX2(sender.getLocation().getBlockX());
+        RegionManager.getRegionByName(name).setY2(sender.getLocation().getBlockY());
+        RegionManager.getRegionByName(name).setZ2(sender.getLocation().getBlockZ());
+        RegionManager.saveRegions();
+    }
+
+    @Subcommand("pos1-anyY")
+    @CommandPermission("basic.admin")
+    @Syntax("<name>")
+    @CommandCompletion("@regions")
+    public void onRegionSetPos1AnyYCommand(final Player sender, String name) {
 
         if(RegionManager.getRegionByName(name) == null) {
             sender.sendMessage(ChatColor.RED + "That region doesn't exist!");
@@ -67,11 +103,11 @@ public class RegionCommands extends BaseCommand {
         RegionManager.saveRegions();
     }
 
-    @Subcommand("pos2")
+    @Subcommand("pos2-anyY")
     @CommandPermission("basic.admin")
     @Syntax("<name>")
-    @CommandCompletion("@regions @flags")
-    public void onRegionSetPos2Command(final Player sender, String name) {
+    @CommandCompletion("@regions")
+    public void onRegionSetPos2AnyYCommand(final Player sender, String name) {
 
         if(RegionManager.getRegionByName(name) == null) {
             sender.sendMessage(ChatColor.RED + "That region doesn't exist!");

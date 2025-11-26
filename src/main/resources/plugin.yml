@@ -1,6 +1,6 @@
 name: kRegions
 main: net.minebo.kregions.KRegions
-author: ForestBukkit
-description: "WorldGuard = bad, kRegions = good"
+authors: ["Ian Rich"]
+description: "A plugin to define regions and set flags for each region."
 version: 1.0-DEV
-api-version: 1.18
+api-version: 1.13
