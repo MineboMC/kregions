@@ -1,9 +1,13 @@
 package net.minebo.kregions.flag;
 
+import net.minebo.kregions.manager.FlagManager;
 import net.minebo.kregions.manager.RegionManager;
 import net.minebo.kregions.model.Flag;
+import net.minebo.kregions.model.Region;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,14 +31,25 @@ public class NoBuild extends Flag implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
+        if(shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
+        Region rg = RegionManager.getRegionByLocation(event.getBlockPlaced().getLocation());
+
+        if (rg == null) return;
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Brawl")) {
+            if(event.getBlockPlaced().getType() == Material.COBWEB && rg.containsFlag(FlagManager.getFlagByName("SafeZone"))) {
+                event.setCancelled(false);
+                return;
+            }
+        }
+
+        if(shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
             event.setCancelled(true);
         }
     }
@@ -42,14 +57,14 @@ public class NoBuild extends Flag implements Listener {
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
         // Use getBlockClicked().getLocation() because that's where the fluid is placed
-        if (shouldCancel(event.getPlayer(), event.getBlockClicked().getLocation())) {
+        if(shouldCancel(event.getPlayer(), event.getBlockClicked().getLocation())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
-        if (shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
+        if(shouldCancel(event.getPlayer(), event.getBlock().getLocation())) {
             event.setCancelled(true);
         }
     }

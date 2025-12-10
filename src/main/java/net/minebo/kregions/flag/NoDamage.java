@@ -2,6 +2,7 @@ package net.minebo.kregions.flag;
 
 import net.minebo.kregions.manager.RegionManager;
 import net.minebo.kregions.model.Flag;
+import net.minebo.kregions.model.Region;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,13 +20,12 @@ public class NoDamage extends Flag {
     public void onPlayerDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
 
-        Player player = (Player) event.getEntity();
+        Region rg = RegionManager.getRegionByLocation(event.getEntity().getLocation());
+        if (rg == null) return;
 
         // Check if the flag applies in this region
-        if(RegionManager.getRegionByLocation(player.getLocation()) != null) {
-            if (RegionManager.getRegionByLocation(player.getLocation()).containsFlag(this)) {
-                event.setCancelled(true); // Cancel incoming damage
-            }
+        if (rg.containsFlag(this)) {
+            event.setCancelled(true); // Cancel incoming damage
         }
     }
 
@@ -36,11 +36,13 @@ public class NoDamage extends Flag {
 
         Player damager = (Player) event.getDamager();
 
+        Region damagerRg = RegionManager.getRegionByLocation(damager.getLocation());
+        Region victimRg = RegionManager.getRegionByLocation(event.getEntity().getLocation());
+        if (damagerRg == null || victimRg == null) return;
+
         // Check if the flag applies where the attacker is
-        if(RegionManager.getRegionByLocation(damager.getLocation()) != null) {
-            if (RegionManager.getRegionByLocation(damager.getLocation()).containsFlag(this) || RegionManager.getRegionByLocation(event.getEntity().getLocation()).containsFlag(this)) {
-                event.setCancelled(true); // Cancel outgoing damage
-            }
+        if (damagerRg.containsFlag(this) || victimRg.containsFlag(this)) {
+            event.setCancelled(true); // Cancel outgoing damage
         }
     }
 
