@@ -24,17 +24,12 @@ public class NoMobs extends Flag {
         if(RegionManager.getRegionByLocation(event.getLocation()) != null) {
             if (RegionManager.getRegionByLocation(event.getLocation()).containsFlag(this)) {
                 // MCRaidz Logic
-                if(event.getEntityType() == EntityType.CHICKEN) {
-                    if(event.getEntity().getCustomName() != null) {
-                        if (event.getEntity().getCustomName().contains("Logger")) {
-                            return;
-                        }
-                    }
-                }
+                if(event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM) return;
 
                 if(Arrays.asList(allowedEntities).contains(event.getEntityType())) {
                     return;
                 }
+
                 event.setCancelled(true);
             }
         }
